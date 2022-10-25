@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 
-const reactionSchema = new Schema(
+const reactionSchema = new mongoose.Schema(
     {
         reactionId: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             default: () => new Types.ObjectId(),
         },
         reactionBody: {
@@ -14,7 +14,7 @@ const reactionSchema = new Schema(
         },
         username: [
             {
-                type: Schema.Types.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: 'User',
             }
         ],
@@ -33,7 +33,7 @@ const reactionSchema = new Schema(
 );
 
 // Schema to create Thought model
-const thoughtSchema = new Schema(
+const thoughtSchema = new mongoose.Schema(
     {
         thoughtText: {
             type: String,
@@ -48,8 +48,8 @@ const thoughtSchema = new Schema(
         },
         username:[
             {
-                type: Schema.Types.ObjectsId,
-                ref: 'User'
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
             }
         ],
         reactions: [reactionSchema]

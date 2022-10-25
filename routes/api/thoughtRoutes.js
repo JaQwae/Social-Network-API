@@ -1,8 +1,11 @@
-const { Thoughts, User } = require('../../controller/');
+const router = require('express').Router();
 
-module.exports = {
-  getVideos(req, res) {
-    Video.find()
-      .then((videos) => res.json(videos))
-      .catch((err) => res.status(500).json(err));
-  },
+const {
+    getThoughts
+} = require('../../controller/thoughtController');
+
+// /api/thoughts
+router.route('/').get(getThoughts)
+// .post(createVideo);
+
+module.exports = router;
