@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new Schema(
+const userSchema = new mongoose.Schema(
     {
         username: {
             type: String,
@@ -15,18 +15,18 @@ const userSchema = new Schema(
             trim: true,
             match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
         },
-        // thoughts: [
-        //     {
-        //         type: Schema.Types.ObjectId,
-        //         ref: 'Thought',
-        //     }
-        // ],
-        // friends: [
-        //     {
-        //         type: Schema.Types.ObjectId,
-        //         ref: 'User',
-        //     }
-        // ]
+        thoughts: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Thought',
+            }
+        ],
+        friends: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+            }
+        ]
     },
     {
         toJSON: {
