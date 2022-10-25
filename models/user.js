@@ -36,12 +36,12 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-// Create a virtual property `friendCount` that gets the amount of friends a user has
-// userSchema.virtual('friendCount')
+// get total count of friends on retrieval
+userSchema.virtual("friendCount").get(function () {
+    return this.friends.length;
+});
 
 // Initialize our User model
 const User = mongoose.model('User', userSchema);
-
-// const handleError = (err) => console.error(err);
 
 module.exports = User;
