@@ -18,7 +18,7 @@ const userSchema = new Schema(
         // thoughts: [
         //     {
         //         type: Schema.Types.ObjectId,
-        //         ref: 'Thoughts',
+        //         ref: 'Thought',
         //     }
         // ],
         // friends: [
@@ -36,8 +36,10 @@ const userSchema = new Schema(
     }
 );
 
+// Create a virtual property `friendCount` that gets the amount of friends a user has
 // userSchema.virtual('friendCount')
 
+// Initialize our User model
 const User = mongoose.model('User', userSchema);
 
 // const handleError = (err) => console.error(err);

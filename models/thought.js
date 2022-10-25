@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Schema to create User model
-const thoughtsSchema = new Schema(
+const thoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
@@ -30,10 +30,12 @@ const thoughtsSchema = new Schema(
     }
 );
 
-// thoughtsSchema.virtual('reactionCount')
+// Create a virtual property `reactionCount` that gets the amount of reactions a thought has
+// thoughtSchema.virtual('reactionCount')
 
-const Thoughts = mongoose.model('Thoughts', thoughtsSchema);
+// Initialize our Thought model
+const Thought = mongoose.model('Thought', thoughtSchema);
 
 // const handleError = (err) => console.error(err);
 
-module.exports = Thoughts;
+module.exports = Thought;
