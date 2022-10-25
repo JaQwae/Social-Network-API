@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "seed": "node utils/seeds.js",
-    "watch": "node server.js"
+    "dev": "node server.js"
   },
   "name": "socialnetworkapi",
   "version": "1.0.0",
