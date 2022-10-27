@@ -14,8 +14,8 @@ const reactionSchema = new mongoose.Schema(
         },
         username: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
+                type: String,
+                required: true,
             }
         ],
         createAt: {
@@ -48,8 +48,8 @@ const thoughtSchema = new mongoose.Schema(
         },
         username:[
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
+                type: String,
+                required: true,
             }
         ],
         reactions: [reactionSchema]

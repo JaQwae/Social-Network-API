@@ -5,7 +5,6 @@ const {
 } = require('../../controller/thoughtController');
 
 // /api/thoughts
-router.route('/').get(getThoughts)
-// .post(createVideo);
+router.route('/').get(getThoughts)// .post(createVideo);
 
 module.exports = router;
