@@ -22,18 +22,26 @@ module.exports = {
     // create a new user
     createUser(req, res) {
         User.create(req.body)
+            .select('-__v')
             .then((dbUserData) => res.json(dbUserData))
             .catch((err) => res.status(500).json(err));
     },
 
     updateUser(req, res) {
-        User.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true, runValidators: true })
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
             .then((user) =>
                 !user
-                    ? res.status(404).json({ message: "No User find with this ID!" })
+                    ? res.status(404).json({ message: 'No user with this id!' })
                     : res.json(user)
             )
-            .catch((err) => res.status(500).json(err));
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            });
     },
 
     deleteUser(req, res) {
