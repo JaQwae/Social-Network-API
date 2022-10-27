@@ -1,6 +1,7 @@
 const User = require('../models/user');
 
 module.exports = {
+    // displays all users
     getUsers(req, res) {
         User.find()
             .select('-__v')
@@ -8,6 +9,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+    // display one user
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
             .select('-__v')
@@ -27,6 +29,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+    // update a user
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -44,6 +47,7 @@ module.exports = {
             });
     },
 
+    // delete a user
     deleteUser(req, res) {
         User.findOneAndRemove({ _id: req.params.userId })
             .then((user) =>
