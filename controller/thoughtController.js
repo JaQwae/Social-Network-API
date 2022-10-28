@@ -8,7 +8,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-     // display one thought
+     // displays one thought
     getSingleThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
             .select('-__v')
@@ -19,7 +19,7 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // create on thought
+    // create a new thought
     createThought(req, res) {
         Thought.create(req.body)
             .then((dbThoughtData) => res.json(dbThoughtData))
