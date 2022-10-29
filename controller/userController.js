@@ -4,7 +4,7 @@ module.exports = {
     // displays all users
     getUsers(req, res) {
         User.find()
-            .populate({ path: 'friends', select: '-__v' })
+            // .populate({ path: 'friends', select: '-__v' })
             .select('-__v')
             .then((users) => res.json(users))
             .catch((err) => res.status(500).json(err));
