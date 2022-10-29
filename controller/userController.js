@@ -4,6 +4,7 @@ module.exports = {
     // displays all users
     getUsers(req, res) {
         User.find()
+            .populate({ path: 'friends', select: '-__v' })
             .select('-__v')
             .then((users) => res.json(users))
             .catch((err) => res.status(500).json(err));
@@ -12,6 +13,7 @@ module.exports = {
     // display one user
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
+            .populate({ path: 'friends', select: '-__v' })
             .select('-__v')
             .then((user) =>
                 !user
@@ -93,8 +95,6 @@ module.exports = {
             {$pull: { friends: req.params.friendId } },
             {runValidators: true, new: true }
         )
-        // .populate({path: 'friends', select: ('-__v')})
-        // .select('-__v')
         .then((user) =>
             !user
                 ? res.status(404).json({message: 'No User founded with this ID'})
