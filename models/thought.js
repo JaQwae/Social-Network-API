@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const reactionSchema = new mongoose.Schema(
     {
         reactionId: {
@@ -19,14 +18,14 @@ const reactionSchema = new mongoose.Schema(
             }
         ],
         createAt: {
-            type: Date,
-            default: Date.now
-            // getter method ot format the timestamp on query
+            type: String,
+            default: Date
         },
     },
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false,
     }
@@ -42,9 +41,8 @@ const thoughtSchema = new mongoose.Schema(
             maxLength: 250
         },
         createAt: {
-            type: Date,
-            default: Date.now
-            // getter method ot format the timestamp on query
+            type: String,
+            default: Date
         },
         username:[
             {
@@ -57,6 +55,7 @@ const thoughtSchema = new mongoose.Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false,
     }
