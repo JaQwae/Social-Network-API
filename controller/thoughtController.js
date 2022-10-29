@@ -1,4 +1,4 @@
-const { Thought, User } = require('../models');
+const { Thought } = require('../models');
 
 module.exports = {
     // get all thoughts
@@ -77,11 +77,27 @@ module.exports = {
         )
             .populate({ path: 'reactions', select: ('-__v') })
             .select('-__v')
-            .then((thought) =>
-                res.json(thought)
+            .then((reaction) =>
+                res.json(reaction)
             )
             .catch((err) => {
-            res.status(500).json(err)
-        })
+                res.status(500).json(err)
+            })
+    },
+
+    //  delete a reaction
+    deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { runValidators: true, new: true }
+        )
+            .then((reaction) =>
+            !reaction
+                ?res.status(404).json({ message: "No reaction founded with this ID!" })
+                : res.json(reaction)
+            )
+            .catch((err) => res.status(500).json(err)
+            );
     }
 }
