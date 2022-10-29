@@ -68,4 +68,38 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
+
+    // Adding a friend
+    addAFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            {$push: { friends: req.params.friendId } },
+            {runValidators: true, new: true }
+        )
+        .populate({path: 'friends', select: ('-__v')})
+        .select('-__v')
+        .then((user) =>
+            !user
+                ? res.status(404).json({message: 'No User founded with this ID'})
+                : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err))
+    },
+
+    // Deleting a friend
+    deletingAFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            {$pull: { friends: req.params.friendId } },
+            {runValidators: true, new: true }
+        )
+        // .populate({path: 'friends', select: ('-__v')})
+        // .select('-__v')
+        .then((user) =>
+            !user
+                ? res.status(404).json({message: 'No User founded with this ID'})
+                : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err))
+    }
 }
