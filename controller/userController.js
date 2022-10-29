@@ -26,8 +26,7 @@ module.exports = {
     // create a new user
     createUser(req, res) {
         User.create(req.body)
-            .select('-__v')
-            .then((dbUserData) => res.json(dbUserData))
+            .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
 
@@ -59,14 +58,8 @@ module.exports = {
                         { user: req.params.userId },
                         { $pull: { users: req.params.userId } },
                         { new: true }
-                    )
-            )
-            .then((user) =>
-                !user
-                    ? res
-                        .status(404)
-                        .json({ message: 'User created but no user with this id!' })
-                    : res.json({ message: 'User successfully deleted!' })
+                    ),
+                res.json({ message: 'User successfully deleted!' })
             )
             .catch((err) => res.status(500).json(err));
     },
