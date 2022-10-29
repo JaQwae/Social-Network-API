@@ -4,12 +4,12 @@ module.exports = {
     // get all thoughts
     getThoughts(req, res) {
         Thought.find()
-        .select('-__v')
+            .select('-__v')
             .then((Thoughts) => res.json(Thoughts))
             .catch((err) => res.status(500).json(err));
     },
 
-     // displays one thought
+    // displays one thought
     getSingleThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
             .select('-__v')
@@ -67,4 +67,21 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
+
+    // create a reaction
+    createReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $push: { reactions: req.body } },
+            { new: true, runValidators: true }
+        )
+            .populate({ path: 'reactions', select: ('-__v') })
+            .select('-__v')
+            .then((thought) =>
+                res.json(thought)
+            )
+            .catch((err) => {
+            res.status(500).json(err)
+        })
+    }
 }
