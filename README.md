@@ -24,10 +24,6 @@ To run this application, you must complete the following steps:
 
 ## Usage
 
-### Walkthrough video:
-
-```The walkthrough demonstrates the GET, POST, PUT, and DELETE methods for users and thoughts, as well as the POST and DELETE methods for thought reactions and friend lists.```
-
 ### Features:
 #### Notable features of this project includes:
 	- User routes allow for 
