@@ -11,12 +11,10 @@ const reactionSchema = new mongoose.Schema(
             required: true,
             maxLength: 280
         },
-        username: [
-            {
-                type: String,
-                required: true,
-            }
-        ],
+        username: {
+            type: String,
+            required: true,
+        },
         createAt: {
             type: String,
             default: Date
@@ -44,12 +42,10 @@ const thoughtSchema = new mongoose.Schema(
             type: String,
             default: Date
         },
-        username:[
-            {
-                type: String,
-                required: true,
-            }
-        ],
+        username: {
+            type: String,
+            required: true,
+        },
         reactions: [reactionSchema]
     },
     {

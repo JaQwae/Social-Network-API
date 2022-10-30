@@ -5,7 +5,7 @@ module.exports = {
     getThoughts(req, res) {
         Thought.find()
             .select('-__v')
-            .then((Thoughts) => res.json(Thoughts))
+            .then((thought) => res.json(thought))
             .catch((err) => res.status(500).json(err));
     },
 
@@ -24,9 +24,24 @@ module.exports = {
     // create a new thought
     createThought(req, res) {
         Thought.create(req.body)
-            .then((dbThoughtData) => res.json(dbThoughtData))
+            .then(({ _id }) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $push: { thoughts: _id } },
+                    { new: true }
+                );
+            })
+            .then((thought) =>
+                !thought
+                    ? res.status(404).json({ message: "No User find with this ID!" })
+                    : res.json(thought)
+            )
             .catch((err) => res.status(500).json(err));
     },
+        // Thought.create(req.body)
+        //     .then((dbThoughtData) => res.json(dbThoughtData))
+        //     .catch((err) => res.status(500).json(err));
+    // },
 
     // update a thought
     updateThought(req, res) {
