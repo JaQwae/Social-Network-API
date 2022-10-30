@@ -24,24 +24,9 @@ module.exports = {
     // create a new thought
     createThought(req, res) {
         Thought.create(req.body)
-            .then(({ _id }) => {
-                return User.findOneAndUpdate(
-                    { _id: req.body.userId },
-                    { $push: { thoughts: _id } },
-                    { new: true }
-                );
-            })
-            .then((thought) =>
-                !thought
-                    ? res.status(404).json({ message: "No User find with this ID!" })
-                    : res.json(thought)
-            )
+            .then((thought) => res.json(thought))
             .catch((err) => res.status(500).json(err));
     },
-        // Thought.create(req.body)
-        //     .then((dbThoughtData) => res.json(dbThoughtData))
-        //     .catch((err) => res.status(500).json(err));
-    // },
 
     // update a thought
     updateThought(req, res) {
@@ -74,11 +59,7 @@ module.exports = {
                     )
             )
             .then((thought) =>
-                !thought
-                    ? res
-                        .status(404)
-                        .json({ message: 'Thought created but no thought with this id!' })
-                    : res.json({ message: 'Thought successfully deleted!' })
+                res.json({ message: 'Thought successfully deleted!' })
             )
             .catch((err) => res.status(500).json(err));
     },
