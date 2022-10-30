@@ -9,7 +9,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // display one user
+    // displays one user
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
             .populate({ path: 'friends', select: '-__v' })
@@ -17,20 +17,20 @@ module.exports = {
             .select('-__v')
             .then((user) =>
                 !user
-                    ? res.status(404).json({ message: 'No user with that ID' })
+                    ? res.status(404).json({ message: 'No user found with this ID' })
                     : res.json(user)
             )
             .catch((err) => res.status(500).json(err));
     },
 
-    // create a new user
+    // creates a new user
     createUser(req, res) {
         User.create(req.body)
             .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
 
-    // update a user
+    // updates a user
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -39,7 +39,7 @@ module.exports = {
         )
             .then((user) =>
                 !user
-                    ? res.status(404).json({ message: 'No user with this id!' })
+                    ? res.status(404).json({ message: 'No user found with this ID' })
                     : res.json(user)
             )
             .catch((err) => {
@@ -48,12 +48,12 @@ module.exports = {
             });
     },
 
-    // delete a user
+    // deletes a user
     deleteUser(req, res) {
         User.findOneAndRemove({ _id: req.params.userId })
             .then((user) =>
                 !user
-                    ? res.status(404).json({ message: 'No user with this id!' })
+                    ? res.status(404).json({ message: 'No user found with this ID' })
                     : User.findOneAndUpdate(
                         { user: req.params.userId },
                         { $pull: { users: req.params.userId } },
@@ -75,7 +75,7 @@ module.exports = {
         .select('-__v')
         .then((user) =>
             !user
-                ? res.status(404).json({message: 'No User founded with this ID'})
+                ? res.status(404).json({message: 'No user found with this ID'})
                 : res.json(user)
             )
             .catch((err) => res.status(500).json(err))
@@ -90,7 +90,7 @@ module.exports = {
         )
         .then((user) =>
             !user
-                ? res.status(404).json({message: 'No User founded with this ID'})
+                ? res.status(404).json({message: 'No user found with this ID'})
                 : res.json(user)
             )
             .catch((err) => res.status(500).json(err))
