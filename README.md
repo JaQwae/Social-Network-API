@@ -23,6 +23,10 @@ To run this application, you must complete the following steps:
   If all steps above are completed correctly, then the application should generate a local social networking API.
 
 ## Usage
+[Walkthough Part 1](https://user-images.githubusercontent.com/105896967/199141411-ce50b767-0275-4357-9627-a6f949d65642.mp4)
+
+[Walkthough Part 2](https://user-images.githubusercontent.com/105896967/199141467-311237be-08af-495c-b516-5d594cba9ebd.mp4)
+
 
 ### Features:
 #### Notable features of this project includes:
